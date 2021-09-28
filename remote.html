@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>Freebox Remote</title>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+
+  <style>
+    html {
+      box-sizing: border-box;
+    }
+
+    .remote {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 280px;
+      margin: auto;
+    }
+
+    .remote .remote-screen {
+      width: 100%;
+      font-size: 5rem;
+      height: 80px;
+      border: none;
+      background-color: #252525;
+      color: #fff;
+      text-align: right;
+      padding-right: 20px;
+      padding-left: 10px;
+    }
+
+    .remote button {
+      height: 60px;
+      background-color: #fff;
+      border-radius: 3px;
+      border: 1px solid #c4c4c4;
+      background-color: transparent;
+      font-size: 1.2rem;
+      color: #333;
+      background-image: linear-gradient(to bottom, transparent, transparent 50%, rgba(0, 0, 0, .04));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), inset 0 1px 0 0 rgba(255, 255, 255, .45), inset 0 -1px 0 0 rgba(255, 255, 255, .15), 0 1px 0 0 rgba(255, 255, 255, .15);
+      text-shadow: 0 1px rgba(255, 255, 255, .4);
+    }
+
+    .remote button:hover,
+    .remote .button_hover {
+      background-color: #eaeaea;
+    }
+
+    .remote .numpad0 {
+      grid-area: 4 / 2 / 4 / 3;
+    }
+
+    .remote .top-keys {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 5px;
+      padding: 5px;
+    }
+
+    .remote .power {
+      grid-area: 1 / 3 / 1 / 4;
+    }
+
+    .remote .remote-keys {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 5px;
+      padding: 5px;
+    }
+
+    .remote .arrows-keys,
+    .remote .control-keys {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 5px;
+      padding: 5px;
+    }
+
+    .remote .free {
+      background-image: url("./Free_logo.svg");
+      background-repeat: no-repeat;
+      /*background-attachment: fixed;*/
+      background-position: center;
+      background-size: 150px;
+      grid-area: 1 / 1 / 1 / 4;
+    }
+
+    .remote .remote-section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /*
+    @font-face {
+      font-family: Free-Regular;
+      src: url("https://assistance.free.fr/assets/fonts/free-regular/assets/fonts/free-regular/Free.woff2") format("woff2"), url("https://assistance.free.fr/assets/fonts/free-regular/assets/fonts/free-regular/Free.woff2");
+    }
+
+    .logo-free {
+      font-family: Free-Regular;
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+      font-weight: 400;
+      letter-spacing: -.3rem;
+      --tw-text-opacity: 1;
+      color: rgba(204, 0, 0, var(--tw-text-opacity));
+      grid-area: 1 / 1 / 1 / 4;
+    }*/
+
+    .remote .red {
+      background-color: #e53935;
+      color: black;
+    }
+
+    .remote .blue {
+      background-color: #1e88e5;
+      color: black;
+    }
+
+    .remote .green {
+      background-color: #388e3c;
+      color: black;
+    }
+
+    .remote .yellow {
+      background-color: #fdd835;
+      color: black;
+    }
+
+    .remote .label {
+      text-align: center;
+    }
+
+    .remote .prog {
+      grid-area: 1 / 3 / 1 / 4;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Hack allowing submitting without changing page -->
+  <iframe name="freebox" style="display:none;"></iframe>
+
+  <div class="remote">
+
+    <form id="remote-form" method="GET" action="http://hd1.freebox.fr/pub/remote_control" target="freebox">
+      <input type="hidden" value="" name="code" id="code" />
+
+      <div class="remote-section">
+        <div class="top-keys">
+
+          <button type="submit" class="operator" name="key" value="tv">AV</button>
+          <button type="submit" class="power" name="key" value="power"><i class="fas fa-power-off"></i></button>
+        </div>
+        <div class="remote-keys">
+          <button type="submit" class="numpad" value="1" name="key" id="key-1">1</button>
+          <button type="submit" class="numpad" value="2" name="key" id="key-2">2</button>
+          <button type="submit" class="numpad" value="3" name="key" id="key-3">3</button>
+
+          <button type="submit" class="numpad" value="4" name="key" id="key-4">4</button>
+          <button type="submit" class="numpad" value="5" name="key" id="key-5">5</button>
+          <button type="submit" class="numpad" value="6" name="key" id="key-6">6</button>
+
+          <button type="submit" class="numpad" value="7" name="key" id="key-7">7</button>
+          <button type="submit" class="numpad" value="8" name="key" id="key-8">8</button>
+          <button type="submit" class="numpad" value="9" name="key" id="key-9">9</button>
+
+          <button type="submit" class="numpad0" value="0" name="key" id="key-0">0</button>
+        </div>
+      </div>
+      <div class="remote-section">
+        <div class="arrows-keys">
+          <button type="submit" class="red" value="red" name="key"><i class="fas fa-undo"></i></button>
+          <button type="submit" value="up" name="key"><i class="fas fa-caret-up"></i></button>
+          <button type="submit" class="blue" value="blue" name="key"><i class="fas fa-search"></i></button>
+
+          <button type="submit" value="left" name="key"><i class="fas fa-caret-left"></i></button>
+          <button type="submit" value="ok" name="key">OK</button>
+          <button type="submit" value="right" name="key"><i class="fas fa-caret-right"></i></button>
+
+          <button type="submit" class="green" value="green" name="key">M</button>
+          <button type="submit" value="down" name="key"><i class="fas fa-caret-down"></i></button>
+          <button type="submit" class="yellow" value="yellow" name="key">i</button>
+        </div>
+      </div>
+      <div class="remote-section">
+        <div class="control-keys">
+          <button type="submit" class="free" value="home" name="key">&nbsp;</button>
+        </div>
+
+        <div class="control-keys">
+          <button type="submit" value="vol_inc" name="key"><i class="fas fa-plus"></i></button>
+          <button type="submit" value="mute" name="key"><i class="fas fa-volume-mute"></i></button>
+          <button type="submit" value="prgm_inc" name="key"><i class="fas fa-plus"></i></button>
+        </div>
+
+        <div class="control-keys">
+          <div class="label">VOL</div>
+          <div class="label prog">PROG</div>
+        </div>
+
+        <div class="control-keys">
+          <button type="submit" value="vol_dec" name="key"><i class="fas fa-minus"></i></button>
+          <button type="submit" value="rec" name="key">&#128308;</button>
+          <button type="submit" value="prgm_dec" name="key"><i class="fas fa-minus"></i></button>
+
+          <button type="submit" value="bwd" name="key"><i class="fas fa-backward"></i></button>
+          <button type="submit" value="play" name="key"><i class="fas fa-play"></i></button>
+          <button type="submit" value="fwd" name="key"><i class="fas fa-forward"></i></button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="text-center">
+    <button type="button" class="btn btn-link text-reset" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <i class="fas fa-question-circle"></i>
+    </button>
+  </div>
+  <!--
+  List from http://tutoriels.domotique-store.fr/content/51/90/fr/api-de-la-freebox-tv-_-player-v5-_-v6-via-requ%C3%AAtes-http.html
+
+  "list" // Affichage de la liste des chaines
+  "back" // Bouton jaune (retour)
+  "swap" // Bouton swap
+
+  "info" // Bouton info
+  "epg" // Bouton epg (fct+)
+  "mail" // Bouton mail
+  "media" // Bouton media (fct+)
+  "help" // Bouton help
+  "options" // Bouton options (fct+)
+  "pip" // Bouton pip
+
+  "bwd" // Bouton << retour arrière
+  "prev" // Bouton |<< précédent
+  "fwd" // Bouton >> avance rapide
+  "next" // Bouton >>| suivant
+  -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Aide</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-floating">
+              <input class="form-control" id="inputCode" placeholder="Code Télécommande" autofocus>
+              <label for="floatingPassword">Code Télécommande</label>
+            </div>
+            <div class="form-text">
+              Pour trouver le code télécommande Freebox:
+              <ul>
+                <li>Freebox Révolution: menu Réglages > Système > Informations Freebox Player et Server > Code
+                  télécommande réseau
+                  télécommande réseau</li>
+                <li>Freebox v5 (HD/Crystal): menu Paramètres > Informations générales > Code télécommande</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-body bg-light">
+                La télécommande ne fonctionne que si vous êtes connecté à votre réseau local (Wifi ou filaire)
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary"
+            onclick="javascript:setCookie('freeboxCode', document.querySelector('#inputCode').value, 365 * 10); return false"
+            data-bs-dismiss="modal">Save changes</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
+
+  <script>
+    'use strict'
+    var codeFromCookie = getCookie("freeboxCode");
+    if (!codeFromCookie) {
+      var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {})
+      myModal.show();
+    }
+
+    document.querySelector("#code").value = codeFromCookie;
+    document.querySelector("#inputCode").value = codeFromCookie;
+
+    // Execute a function when the user releases a key on the keyboard
+    window.addEventListener("keyup", function (event) {
+      // numpad 0 to 9
+      if (event.keyCode > 95 && event.keyCode < 106) {
+        var clickedKey = event.keyCode - 96
+        event.preventDefault();
+        document.getElementById("key-" + clickedKey).click();
+      }
+    });
+
+    var numpadButtons = document.getElementById("remote-form").querySelectorAll(".numpad");
+    var i;
+
+    for (i = 0; i < numpadButtons.length; i++) {
+      const TIMEOUT_HIGHLIGHT_BUTTON = 40;
+      numpadButtons[i].addEventListener("click", function (event) {
+        this.classList.add("button_hover");
+        var myobject = this
+        setTimeout(function () { myobject.classList.remove("button_hover"); }, TIMEOUT_HIGHLIGHT_BUTTON);
+      })
+    }
+
+
+    function setCookie(cname, cvalue, exdays) {
+      const d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      let expires = "expires=" + d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;SameSite=Strict";
+      document.querySelector("#code").value = cvalue;
+      document.querySelector("#inputCode").value = cvalue;
+    }
+    function getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+  </script>
+
+</body>
+
+</html>
